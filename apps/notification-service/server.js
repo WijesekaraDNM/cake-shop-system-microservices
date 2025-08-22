@@ -11,7 +11,11 @@ app.use(express.json());
 
 // Health check
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "OK", service: "Notification Service" });
+  res.status(200).json({
+    status: "OK",
+    service: "Notification Service",
+    features: ["email", "sms"],
+  });
 });
 
 // API routes
@@ -34,5 +38,11 @@ app.listen(PORT, () => {
   console.log(`🩺 Health check: http://localhost:${PORT}/health`);
   console.log(
     `📧 Email endpoint: POST http://localhost:${PORT}/api/notifications/email/order-confirmation`
+  );
+  console.log(
+    `📱 SMS endpoint: POST http://localhost:${PORT}/api/notifications/sms/order-confirmation`
+  );
+  console.log(
+    `📨 Combined endpoint: POST http://localhost:${PORT}/api/notifications/order-confirmation`
   );
 });
