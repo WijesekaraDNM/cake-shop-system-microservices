@@ -25,3 +25,11 @@ exports.validateGenericSMSRequest = ({ to, message }) => {
   }
   return null;
 };
+
+// ✅ NEW: For out-for-delivery SMS (no totalAmount required)
+exports.validateOutForDeliverySMSRequest = ({ customerPhone, customerName, orderId }) => {
+  if (!customerPhone || !customerName || !orderId) {
+    return "Missing required fields for out-for-delivery SMS";
+  }
+  return null;
+};

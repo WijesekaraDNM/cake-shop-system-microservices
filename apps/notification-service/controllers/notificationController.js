@@ -1,7 +1,9 @@
+// controllers/notificationController.js
 const {
   sendOrderConfirmationNotifications: notifyAll,
   sendOrderConfirmationEmail,
   sendOrderConfirmationSMS,
+  sendOutForDeliverySMS,
 } = require("../services/notificationService");
 const { sendSMS } = require("../services/smsService");
 const {
@@ -9,8 +11,8 @@ const {
   validateEmailRequest,
   validateSMSRequest,
   validateGenericSMSRequest,
+  validateOutForDeliverySMSRequest, // 👈 import it
 } = require("../utils/validators");
-
 // Combined email + SMS
 exports.sendOrderConfirmationNotifications = async (req, res, next) => {
   console.log("📨 Received request for order confirmation notifications");
@@ -89,6 +91,29 @@ exports.sendGenericSMS = async (req, res, next) => {
     });
   } catch (error) {
     console.error("❌ Error in generic SMS:", error.message);
+    next(error);
+  }
+};
+
+
+exports.sendOutForDeliverySMSOnly = async (req, res, next) => {
+  try {
+    const validationError = validateOutForDeliverySMSRequest(req.body); // 👈 use correct validator
+    if (validationError)
+      return res.status(400).json({ success: false, error: validationError });
+
+    const result = await sendOutForDeliverySMS(req.body);
+
+    if (!result.success) {
+      return res.status(500).json({ success: false, error: result.error });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Out-for-delivery SMS sent successfully",
+    });
+  } catch (error) {
+    console.error("❌ Error in out-for-delivery SMS:", error.message);
     next(error);
   }
 };

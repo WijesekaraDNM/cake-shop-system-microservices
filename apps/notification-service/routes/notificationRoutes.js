@@ -5,6 +5,7 @@ const {
   sendOrderConfirmationEmailOnly,
   sendOrderConfirmationSMSOnly,
   sendGenericSMS,
+  sendOutForDeliverySMSOnly,
 } = require("../controllers/notificationController");
 
 // Combined email + SMS
@@ -15,6 +16,9 @@ router.post("/email/order-confirmation", sendOrderConfirmationEmailOnly);
 
 // SMS-only
 router.post("/sms/order-confirmation", sendOrderConfirmationSMSOnly);
+
+// Out-for-delivery SMS
+router.post("/sms/out-for-delivery", sendOutForDeliverySMSOnly);
 
 // Generic SMS
 router.post("/sms", sendGenericSMS);

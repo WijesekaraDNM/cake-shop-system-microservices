@@ -17,7 +17,7 @@ async function sendOrderConfirmationSMS(toPhone, customerName, orderId, totalAmo
   // Format the phone number if needed (ensure it includes country code)
   const formattedPhone = toPhone.startsWith('+') ? toPhone : `+${toPhone}`;
 
-  const messageBody = `Hi ${customerName}! 🎂 Your cake order #${orderId} for $${totalAmount} has been confirmed. We'll notify you when it's out for delivery. Thank you!`;
+  const messageBody = `Hi ${customerName}! 🎂 Your cake order #${orderId} for ${totalAmount}LKR has been confirmed. We'll notify you when it's out for delivery. Thank you!`;
 
   try {
     const message = await twilioClient.messages.create({
@@ -80,7 +80,29 @@ async function sendSMS(toPhone, message) {
   }
 }
 
+
+
+/**
+ * Sends an SMS when the order is out for delivery.
+ * @param {string} toPhone - The customer's phone number.
+ * @param {string} customerName - The customer's name.
+ * @param {string} orderId - The order ID.
+ */
+async function sendOutForDeliverySMS(toPhone, customerName, orderId) {
+  try {
+    const message = await client.messages.create({
+      body: `🚚 Hi ${customerName}, your cake order #${orderId} is now out for delivery! 🎉 Get ready to enjoy your treat soon.`,
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: toPhone,
+    });
+    console.log("✅ Out-for-delivery SMS sent:", message.sid);
+  } catch (error) {
+    console.error("❌ Error sending out-for-delivery SMS:", error.message);
+  }
+}
+
 module.exports = {
   sendOrderConfirmationSMS,
+  sendOutForDeliverySMS,
   sendSMS
 };

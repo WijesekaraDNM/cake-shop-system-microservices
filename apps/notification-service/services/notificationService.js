@@ -38,8 +38,31 @@ async function sendOrderConfirmationNotifications(orderData) {
   return results;
 }
 
+/**
+ * Sends SMS when order is out for delivery.
+ */
+async function sendOutForDeliverySMS(orderData) {
+  const { customerPhone, customerName, orderId } = orderData;
+
+  const result = { success: false, error: null };
+
+  try {
+    if (customerPhone) {
+      await sendOutForDeliverySMS(customerPhone, customerName, orderId);
+      result.success = true;
+    } else {
+      result.error = "Customer phone is missing";
+    }
+  } catch (error) {
+    result.error = error.message;
+  }
+
+  return result;
+}
+
 module.exports = {
   sendOrderConfirmationNotifications,
-  sendOrderConfirmationEmail: sendOrderConfirmationEmail, // Re-export
-  sendOrderConfirmationSMS: sendOrderConfirmationSMS      // Re-export
+  sendOrderConfirmationEmail,
+  sendOrderConfirmationSMS,
+  sendOutForDeliverySMS,
 };

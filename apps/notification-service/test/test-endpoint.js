@@ -70,6 +70,19 @@ async function testGenericSMS() {
   }
 }
 
+async function testOutForDeliverySMS() {
+  try {
+    const response = await axios.post(`${BASE_URL}/sms/out-for-delivery`, {
+      customerPhone: "+94712053601", // must be verified in Twilio trial
+      customerName: "Test User",
+      orderId: "TEST-004",
+    });
+    console.log("🚚 Out-for-Delivery SMS Endpoint:", response.data);
+  } catch (error) {
+    console.error("❌ Out-for-Delivery SMS Endpoint Failed:", error.response?.data || error.message);
+  }
+}
+
 async function runTests() {
   console.log("🚀 Running Notification Service Endpoint Tests...\n");
   await testHealth();
@@ -77,6 +90,7 @@ async function runTests() {
   await testSMSNotification();
   await testCombinedNotification();
   await testGenericSMS();
+  await testOutForDeliverySMS(); // 👈 new test
 }
 
 runTests();
