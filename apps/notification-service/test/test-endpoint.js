@@ -31,7 +31,7 @@ async function testEmailNotification() {
 async function testSMSNotification() {
   try {
     const response = await axios.post(`${BASE_URL}/sms/order-confirmation`, {
-      customerPhone: "+94713271747", // must be verified in Twilio trial
+      customerPhone: "+94712053601", // must be verified in Twilio trial
       customerName: "Test User",
       orderId: "TEST-002",
       totalAmount: 30.5,
@@ -46,7 +46,7 @@ async function testCombinedNotification() {
   try {
     const response = await axios.post(`${BASE_URL}/order-confirmation`, {
       customerEmail: "rathnasirinimal1970@gmail.com",
-      customerPhone: "+94713271747",
+      customerPhone: "+94712053601",
       customerName: "Test User",
       orderId: "TEST-003",
       items: [{ name: "Chocolate Cake", quantity: 2, price: 19.99 }],
@@ -61,7 +61,7 @@ async function testCombinedNotification() {
 async function testGenericSMS() {
   try {
     const response = await axios.post(`${BASE_URL}/sms`, {
-      to: "+94713271747",
+      to: "+94712053601",
       message: "🚀 This is a test generic SMS from Notification Service.",
     });
     console.log("📲 Generic SMS Endpoint:", response.data);
