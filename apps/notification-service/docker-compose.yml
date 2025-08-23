@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  notification-service:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - SENDGRID_FROM_EMAIL=${SENDGRID_FROM_EMAIL}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+    networks:
+      - cake-shop-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - cake-shop-network
+    restart: unless-stopped
+
+volumes:
+  rabbitmq_data:
+
+networks:
+  cake-shop-network:
+    driver: bridge
