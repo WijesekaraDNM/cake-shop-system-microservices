@@ -22,17 +22,17 @@ const CreateOrder = z.object({
 });
 
 app.get('/health', (_req, res) => res.send('ok'));
-app.get('/orders', async (_req, res) => {
+app.get('/', async (_req, res) => {
   try {
     const orders = await db.order.findMany();
     res.json(orders);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch orders' });
+    res.status(500).json({ error: 'Failed to fetch orders' + err });
   }
 });
 
 //create order
-app.post('/orders', async (req, res) => {
+app.post('/', async (req, res) => {
   const { customerId, items, total } = req.body;
   const order = await db.order.create({
     data: { customerId, items, total, status: 'pending' }
@@ -41,7 +41,7 @@ app.post('/orders', async (req, res) => {
 });
 
 // Get order by id
-app.get('/orders/:id', async (req, res) => {
+app.get('/:id', async (req, res) => {
   try {
     const order = await db.order.findUnique({
       where: { id: req.params.id },
@@ -53,8 +53,21 @@ app.get('/orders/:id', async (req, res) => {
   }
 });
 
+//get order by customer
+app.get('/customer/:customerId', async (req, res) => {
+  try {
+    const orders = await db.order.findMany({
+      where: { customerId: req.params.customerId },
+    });
+    if (!orders) return res.status(404).json({ error: 'Orders not found' });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
+
 // Update order status
-app.patch('/orders/:id/status', async (req, res) => {
+app.patch('/:id/status', async (req, res) => {
   try {
     const order = await db.order.update({
       where: { id: req.params.id },
@@ -67,7 +80,7 @@ app.patch('/orders/:id/status', async (req, res) => {
 });
 
 // Cancel order
-app.delete('/orders/:id', async (req, res) => {
+app.delete('/:id', async (req, res) => {
   try {
     await db.order.delete({ where: { id: req.params.id } });
     res.status(204).send();
@@ -76,5 +89,5 @@ app.delete('/orders/:id', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5004;
 app.listen(PORT, () => console.log(`order-svc on :${PORT}`));

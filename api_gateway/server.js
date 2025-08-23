@@ -27,6 +27,20 @@ app.use('/api/user', createProxyMiddleware({
   pathRewrite: { '^/api/user': '/api/user' }
 }));
 
+// Proxy /api/user requests to userService running on http://localhost:5003
+app.use('/api/cart', createProxyMiddleware({
+  target: 'http://localhost:5003',
+  changeOrigin: true,
+  pathRewrite: { '^/api/cart': '/api/cart' }
+}));
+
+// Proxy /api/user requests to userService running on http://localhost:5004
+app.use('/api/order', createProxyMiddleware({
+  target: 'http://localhost:5004',
+  changeOrigin: true,
+  pathRewrite: { '^/api/order': '' }
+}));
+
 // Add more proxies for other microservices here
 
 const PORT = process.env.PORT || 8081;

@@ -6,7 +6,7 @@ require('dotenv').config();
 const cartRoutes = require('./routes/cartRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 5003;
 
 // Middleware
 app.use(cors());
