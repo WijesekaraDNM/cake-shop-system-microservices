@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import {connectDB} from '../src/utils/db.js';
-import foodRoutes from '../src/routes/foodRoutes.js';
+import userRoutes from '../src/routes/userRoutes.js';
 import { errorHandler } from '../src/middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -11,10 +11,10 @@ const app = express();
 
 app.use(express.json());
 
-app.use('', foodRoutes);
+app.use('', userRoutes);
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
 
-app.listen(PORT, () => console.log(`Food service running on port ${PORT}`));
+app.listen(PORT, () => console.log(`User service running on port ${PORT}`));

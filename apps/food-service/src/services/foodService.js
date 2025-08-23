@@ -10,7 +10,7 @@ export const getFoodById = async (id) => {
 
 export const getCategoriesWithCounts = async () => {
   const categories = await foodModel.aggregate([
-    { $unwind: '$category' },
+    { $match: { category: { $exists: true, $ne: null } } },  // optional: 
     { $group: { _id: '$category', count: { $sum: 1 } } },
     { $project: { _id: 0, name: '$_id', count: '$count' } },
   ]).sort({ count: -1 });
@@ -46,7 +46,10 @@ export const updateFoodItem = async (id, updateData) => {
 };
 
 export const deleteFoodItem = async (id) => {
-  const food = await foodModel.findById(id);
-  if (!food) throw new Error('Food item not found');
-  return await food.remove();
+  const result = await foodModel.deleteOne({ _id: id });
+  if (result.deletedCount === 0) {
+    throw new Error('Food item not found');
+  }
+  return result;
 };
+

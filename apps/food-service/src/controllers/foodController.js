@@ -1,5 +1,5 @@
 import handler from 'express-async-handler';
-import * as foodService from '../services/foodServices.js';
+import * as foodService from '../services/foodService.js';
 
 const getFoods = handler(async (req, res) => {
   const foods = await foodService.getAllFoods();
@@ -17,6 +17,7 @@ const getFoodById = handler(async (req, res) => {
 
 const getCategories = handler(async (req, res) => {
   const categories = await foodService.getCategoriesWithCounts();
+  console.log(categories)
   res.json(categories);
 });
 
