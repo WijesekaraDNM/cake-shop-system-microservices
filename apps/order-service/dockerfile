@@ -1,0 +1,30 @@
+# Install dependencies
+FROM node:20.18.1-alpine3.20 AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+# Build TypeScript and generate Prisma client
+FROM node:20.18.1-alpine3.20 AS builder
+WORKDIR /app
+COPY prisma ./prisma
+COPY . .
+COPY --from=deps /app/node_modules ./node_modules
+RUN npm ci && npx prisma generate && npm run build
+
+# Production image
+FROM node:20.18.1-alpine3.20 AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY package*.json ./
+RUN npm ci --omit=dev
+RUN apk add --no-cache libc6-compat
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/prisma ./prisma
+EXPOSE 3001
+#CMD ["node", "dist/index.js"]
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
