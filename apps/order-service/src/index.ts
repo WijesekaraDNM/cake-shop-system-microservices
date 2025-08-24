@@ -53,6 +53,19 @@ app.get('/orders/:id', async (req, res) => {
   }
 });
 
+//get order by customer
+app.get('/orders/customer/:customerId', async (req, res) => {
+  try {
+    const orders = await db.order.findMany({
+      where: { customerId: req.params.customerId },
+    });
+    if (!orders) return res.status(404).json({ error: 'Orders not found' });
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch order' });
+  }
+});
+
 // Update order status
 app.patch('/orders/:id/status', async (req, res) => {
   try {
@@ -76,5 +89,5 @@ app.delete('/orders/:id', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5004;
 app.listen(PORT, () => console.log(`order-svc on :${PORT}`));

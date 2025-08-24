@@ -1,0 +1,32 @@
+version: '1.0'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: order_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: Rashmitha
+      POSTGRES_PASSWORD: rush
+      POSTGRES_DB: cakeshoporder
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  order-service:
+    build: ./apps/order-service
+    container_name: order-service
+    restart: always
+    env_file: ./apps/order-service/.env
+    ports:
+      - "5004:5004"
+    depends_on:
+      - postgres
+    command: >
+      sh -c "
+        npx prisma migrate deploy &&
+        node dist/index.js
+      "
+
+volumes:
+  pgdata:
