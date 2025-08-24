@@ -13,7 +13,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
  * @param {number} totalAmount - The total cost of the order.
  * @returns {Promise} - A promise that resolves when the email is sent.
  */
-async function sendOrderConfirmationEmail(toEmail, customerName, orderId, items, totalAmount) {
+async function sendOrderConfirmationEmail(toEmail, customerName, orderId, items, totalAmount, status) {
   
   // Format the items list for the email
   const itemsList = items.map(item => 
@@ -277,8 +277,8 @@ async function sendOrderConfirmationEmail(toEmail, customerName, orderId, items,
             </div>
             
             <div class="status-update">
-              <strong>🔄 Order Status: Processing</strong>
-              <p style="margin-top: 10px;">We'll send you another notification when your delicious order is ready for delivery!</p>
+              <strong>🔄 Order Status: ${status}</strong>
+              <p style="margin-top: 10px;">We'll send you another notification as order progressed!</p>
             </div>
             
             <!-- Contact Information -->

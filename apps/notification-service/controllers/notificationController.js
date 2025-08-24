@@ -42,8 +42,8 @@ exports.sendOrderConfirmationEmailOnly = async (req, res, next) => {
     if (validationError)
       return res.status(400).json({ success: false, error: validationError });
 
-    const { customerEmail, customerName, orderId, items, totalAmount } = req.body;
-    await sendOrderConfirmationEmail(customerEmail, customerName, orderId, items, totalAmount);
+    const { customerEmail, customerName, orderId, items, totalAmount, status } = req.body;
+    await sendOrderConfirmationEmail(customerEmail, customerName, orderId, items, totalAmount, status);
 
     res.status(200).json({
       success: true,
