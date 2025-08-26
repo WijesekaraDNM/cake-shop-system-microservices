@@ -36,7 +36,7 @@ app.get('/', async (_req, res) => {
 
 //create order
 app.post('/', async (req, res) => {
-  const { customerId, items, total } = req.body;
+  const { customerId, customerName, customerEmail, items, total } = req.body;
   const order = await db.order.create({
     data: { customerId, items, total, status: 'pending' }
   });
@@ -52,8 +52,8 @@ app.post('/', async (req, res) => {
   }
   const message: MessageData = {
     orderId: order.id,
-    customerName: "Revenger",
-    customerEmail: "engerrev897@gmail.com",
+    customerName: customerName,
+    customerEmail: customerEmail,
     totalAmount: order.total,
     items: itemsList,
     status: "Pending"
