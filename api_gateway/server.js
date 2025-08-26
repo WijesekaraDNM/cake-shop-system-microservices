@@ -6,6 +6,9 @@ const app = express();
 
 const FOOD_SERVICE_URL = process.env.FOOD_SERVICE_URL || 'http://localhost:5001';
 const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://localhost:5002';
+const CART_SERVICE_URL = process.env.CART_SERVICE_URL || 'http://localhost:5003';
+const ORDER_SERVICE_URL = process.env.ORDER_SERVICE_URL || 'http://localhost:5004';
+const NOTIFICATION_SERVICE_URL = process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:5005';
 
 // Enable CORS for your frontend domain or all origins during development
 app.use(cors({
@@ -32,14 +35,14 @@ app.use('/api/user', createProxyMiddleware({
 
 // Proxy /api/user requests to userService running on http://localhost:5003
 app.use('/api/cart', createProxyMiddleware({
-  target: 'http://localhost:5003',
+  target: CART_SERVICE_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/cart': '/api/cart' }
 }));
 
 // Proxy /api/user requests to userService running on http://localhost:5004
 app.use('/api/order', createProxyMiddleware({
-  target: 'http://localhost:5004',
+  target: ORDER_SERVICE_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/order': '' }
 }));
