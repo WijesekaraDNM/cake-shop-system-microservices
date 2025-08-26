@@ -34,6 +34,7 @@ export const getFoodsByCategory = async (category) => {
 };
 
 export const createFoodItem = async (foodData) => {
+  console.log("create :", foodData)
   const food = new foodModel(foodData);
   return await food.save();
 };

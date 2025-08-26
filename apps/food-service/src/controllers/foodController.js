@@ -1,8 +1,10 @@
 import handler from 'express-async-handler';
 import * as foodService from '../services/foodService.js';
+import { foodModel } from '../models/foodModel.js';
 
 const getFoods = handler(async (req, res) => {
   const foods = await foodService.getAllFoods();
+  console.log(foods)
   res.json(foods);
 });
 
@@ -34,13 +36,47 @@ const category = handler(async (req, res) => {
 });
 
 const createFood = handler(async (req, res) => {
-  const createdFood = await foodService.createFoodItem(req.body);
-  res.status(201).json(createdFood);
+  const { name, description, price, imageData, category, available } = req.body;
+  console.log("Request body: ", req.body);
+  try {
+    const replacedStr = imageData.replace(/^data:image\/\w+;base64,/, '');
+    const imageDataStr = Buffer.from(replacedStr, 'base64');
+
+
+    console.log("Image str: ", imageDataStr);
+    const food = new foodModel({
+      name,
+      description,
+      price,
+      imageData: imageDataStr,
+      category,
+      available,
+    });
+
+    
+    console.log("cake created :", food);
+    const createdFood = await foodService.createFoodItem(food);
+    console.log("createdCake :", createFood);
+    res.status(201).json(createdFood);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to create food item', error });
+  }
+  
 });
 
 const updateFood = handler(async (req, res) => {
-  const updatedFood = await foodService.updateFoodItem(req.params.id, req.body);
-  res.json(updatedFood);
+   try {
+    const { imageData, ...updateFields } = req.body;
+    if (imageData) {
+      // Convert base64 image string to Buffer
+      const replacedStr = imageData.replace(/^data:image\/\w+;base64,/, '');
+      updateFields.imageData = Buffer.from(replacedStr, 'base64');
+    }
+    const updatedFood = await foodService.updateFoodItem(req.params.id, updateFields);
+    res.json(updatedFood);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update food item', error });
+  }
 });
 
 const deleteFood = handler(async (req, res) => {
