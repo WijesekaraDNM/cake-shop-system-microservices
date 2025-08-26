@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  api_gateway:
+    build:
+      context: ./api_gateway
+    ports:
+      - "8081:8081"
+    depends_on:
+      - user_service
+      - food_service
+    environment:
+      USER_SERVICE_URL: http://user_service:5002
+      FOOD_SERVICE_URL: http://food_service:5001
+
+  user_service:
+    build:
+      context: ./apps/user-service
+    ports:
+      - "5002:5002"
+    environment:
+      MONGO_URI: ""
+      PORT: 5002
+      JWT_SECRET: ""
+
+  food_service:
+    build:
+      context: ./apps/food-service
+    ports:
+      - "5001:5001"
+    environment:
+      MONGO_URI: ""
+      PORT: 5001

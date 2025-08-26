@@ -4,6 +4,9 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const app = express();
 
+const FOOD_SERVICE_URL = process.env.FOOD_SERVICE_URL || 'http://localhost:5001';
+const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://localhost:5002';
+
 // Enable CORS for your frontend domain or all origins during development
 app.use(cors({
   origin: 'http://localhost:3000', // Change '*' to your frontend URL in production, e.g., 'http://localhost:3000'
@@ -13,7 +16,7 @@ app.use(cors({
 
 // Proxy /api/food requests to foodService running on http://localhost:5001
 app.use('/api/food', createProxyMiddleware({
-  target: 'http://localhost:5001',
+  target: FOOD_SERVICE_URL,
   changeOrigin: true,
   pathRewrite: {
     '^/api/food': '/api/food', // optional if paths are the same
@@ -22,7 +25,7 @@ app.use('/api/food', createProxyMiddleware({
 
 // Proxy /api/user requests to userService running on http://localhost:5002
 app.use('/api/user', createProxyMiddleware({
-  target: 'http://localhost:5002',
+  target: USER_SERVICE_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/user': '/api/user' }
 }));

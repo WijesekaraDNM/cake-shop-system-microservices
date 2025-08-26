@@ -3,16 +3,22 @@ import jwt from 'jsonwebtoken';
 import * as userService from '../services/userService.js';
 import bcrypt from 'bcryptjs';
 
-const PASSWORD_HASH_SALT_ROUNDS = 10;
-
 const loginUser = handler(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userService.getUserByEmail(email);
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ message: 'Invalid email or password' });
+  if (!user) {
+    console.log("user not found")
+    return res.status(404).json({ code: 'USER_NOT_FOUND', message: 'No user found with this email.' });
   }
 
+  const passwordMatches = await bcrypt.compare(password, user.password);
+  if (!passwordMatches) {
+    console.log("Invalid password")
+    return res.status(401).json({ code: 'INVALID_PASSWORD', message: 'Password is incorrect.' });
+  }
+  console.log(user)
+  console.log(passwordMatches)
   res.json(generateTokenResponse(user));
 });
 
@@ -21,7 +27,7 @@ const registerUser = handler(async (req, res) => {
 
   const existingUser = await userService.getUserByEmail(email);
   if (existingUser) {
-    return res.status(400).json({ message: 'User already exists, please login!' });
+    return res.status(400).json({ code: 'USER_EXISTS', message: 'User already exists, please login!' });
   }
 
   const newUser = await userService.createUser({ name, email, password, address });
