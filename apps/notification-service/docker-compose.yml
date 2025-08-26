@@ -4,10 +4,10 @@ services:
   notification-service:
     build: .
     ports:
-      - "3001:3001"
+      - "5005:5005"
     environment:
       - NODE_ENV=development
-      - PORT=3001
+      - PORT=5005
       - RABBITMQ_URL=amqp://rabbitmq:5672
       - SENDGRID_API_KEY=${SENDGRID_API_KEY}
       - SENDGRID_FROM_EMAIL=${SENDGRID_FROM_EMAIL}

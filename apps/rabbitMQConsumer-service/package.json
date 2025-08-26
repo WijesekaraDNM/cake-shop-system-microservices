@@ -1,0 +1,37 @@
+{
+  "name": "rabbitmqconsumer-service",
+  "version": "1.0.0",
+  "description": "A RabbitMQ consumer service that calls existing notification API endpoints",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node src/publisher.js",
+    "test:order": "node src/publisher.js order",
+    "test:email": "node src/publisher.js email",
+    "test:sms": "node src/publisher.js sms",
+    "test:delivery": "node src/publisher.js delivery",
+    "test:generic": "node src/publisher.js generic",
+    "load-test": "node src/publisher.js --load-test 50 --type order",
+    "load-test:sms": "node src/publisher.js --load-test 30 --type sms",
+    "docker:build": "docker build -t rabbitmq-consumer .",
+    "docker:run": "docker run --env-file .env -p 3003:3003 rabbitmq-consumer"
+  },
+  "keywords": [
+    "rabbitmq",
+    "consumer",
+    "notifications",
+    "microservices",
+    "nodejs",
+    "api-integration"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "amqplib": "^0.10.8",
+    "axios": "^1.11.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}

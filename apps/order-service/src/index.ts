@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import { z } from 'zod';
 import bodyParser from 'body-parser';
 import db from './db.js';
+import { sendRabbitMessages, MessageData, OrderItem } from './message.js';
+
 dotenv.config();
 
 const app = express();
@@ -37,6 +39,25 @@ app.post('/', async (req, res) => {
   const order = await db.order.create({
     data: { customerId, items, total, status: 'pending' }
   });
+  let itemsList: OrderItem[] = [];
+
+  if(items.length != 0) {
+    itemsList = items.map((item: any) => ({
+      itemId: item.itemId,
+      name: item.name,
+      quantity: item.quantity,
+      price: item.price
+    }));
+  }
+  const message: MessageData = {
+    orderId: order.id,
+    customerName: "Revenger",
+    customerEmail: "engerrev897@gmail.com",
+    totalAmount: order.total,
+    items: itemsList,
+    status: "Pending"
+  };
+  sendRabbitMessages(1, 'email', message);
   res.status(201).json(order);
 });
 
