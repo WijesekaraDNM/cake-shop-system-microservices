@@ -47,9 +47,16 @@ app.use('/api/order', createProxyMiddleware({
   pathRewrite: { '^/api/order': '' }
 }));
 
-// Add more proxies for other microservices here
-
 const PORT = process.env.PORT || 8081;
+
+// Add more proxies for other microservices here
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'API gateway is running!', 
+    timestamp: new Date().toISOString(),
+    port: PORT 
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`API Gateway running on port ${PORT}`);

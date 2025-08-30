@@ -1,0 +1,84 @@
+version: "0.7"
+
+services:
+  api_gateway:
+    build:
+      context: ./api_gateway
+    ports:
+      - "8081:8081"
+    depends_on:
+      - user_service
+      - food_service
+    env_file:
+      - ./api_gateway/.env
+
+  user_service:
+    build:
+      context: ./apps/user-service
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./apps/user-service/.env
+
+  food_service:
+    build:
+      context: ./apps/food-service
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./apps/food-service/.env
+
+  cart_service:
+    build:
+      context: ./apps/cart-service
+    ports:
+      - "5003:5003"
+    env_file:
+      - ./apps/cart-service/.env
+
+  order_service:
+    build:
+      context: ./apps/order-service
+    ports:
+      - "5004:5004"
+    env_file:
+      - ./apps/order-service/.env
+
+  notification_service:
+    build:
+      context: ./apps/notification-service
+    ports:
+      - "5005:5005"
+    env_file:
+      - ./apps/notification-service/.env
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq_consumer:
+    build:
+      context: ./apps/rabbitMQConsumer-service
+    ports:
+      - "5010:5010"
+    env_file:
+      - ./apps/rabbitMQConsumer-service/.env
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  rabbitmq_data:
