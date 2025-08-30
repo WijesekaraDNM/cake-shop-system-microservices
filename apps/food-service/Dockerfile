@@ -13,7 +13,7 @@
 # CMD ["node", "src/app.js"]
 
 
-FROM node:18-alpine
+FROM node:22-alpine3.20
 
 WORKDIR /app
 

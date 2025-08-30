@@ -222,7 +222,7 @@ async function startAllConsumers() {
 function startHealthCheck() {
   const express = require('express');
   const app = express();
-  const port = process.env.HEALTH_CHECK_PORT || 8080;
+  const port = process.env.HEALTH_CHECK_PORT || 5010;
   
   app.get('/health', (req, res) => {
     res.json({
