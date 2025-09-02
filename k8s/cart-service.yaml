@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: cart-svc
-        image: rashmithaDocker/cart-svc:latest
+        image: masha230/cart-service
         ports:
         - containerPort: 5003
         env:
         - name: PORT
-          value: 5003
+          value: "5003"
         - name: MONGODB_URI
           valueFrom:
             secretKeyRef:
@@ -28,7 +28,7 @@ spec:
         - name: REDIS_HOST
           value: "localhost"
         - name: REDIS_PORT
-          value: 6379
+          value: "6379"
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:

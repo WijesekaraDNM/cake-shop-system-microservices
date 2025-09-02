@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: user-svc
-        image: rashmithaDocker/user-svc:latest
+        image: masha230/user-service
         ports:
         - containerPort: 5002
         env:
@@ -24,7 +24,7 @@ spec:
               name: user-svc-secrets
               key: MONGO_URI
         - name: PORT
-          value: 5002
+          value: "5002"
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:

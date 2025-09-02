@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: order-svc
-        image: rashmithaDocker/order-svc:latest
+        image: masha230/order-service
         ports:
         - containerPort: 5004
         env:

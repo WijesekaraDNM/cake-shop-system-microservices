@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: rashmithaDocker/api-gateway:latest
+        image: masha230/api-gateway
         ports:
         - containerPort: 8081
         env:

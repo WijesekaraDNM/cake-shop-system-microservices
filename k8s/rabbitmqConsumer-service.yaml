@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rabbitmq-consumer
-          image: rashmithadocker/rabbitmq-consumer:latest
+          image: masha230/rabbitmqconsumer-service
           env:
             - name: RABBITMQ_URL
               value: amqp://rabbitmq:5672
@@ -25,7 +25,7 @@ spec:
             - name: ENABLE_HEALTH_CHECK
               value: "true"
             - name: HEALTH_CHECK_PORT
-              value: 5010
+              value: "5010"
             - name: NODE_ENV
               value: development
           ports:

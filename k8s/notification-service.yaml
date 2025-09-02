@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: notification-svc
-        image: rashmithaDocker/notification-svc:latest
+        image: masha230/notification-service
         ports:
         - containerPort: 5005
         env:
@@ -46,7 +46,7 @@ spec:
               name: notification-svc-secrets
               key: TWILIO_PHONE_NUMBER
         - name: PORT
-          value: 5005
+          value: "5005"
 ---
 apiVersion: v1
 kind: Service
