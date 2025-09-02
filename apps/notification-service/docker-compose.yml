@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  notification-service:
+    build: .
+    ports:
+      - "5005:5005"
+    environment:
+      - NODE_ENV=development
+      - PORT=5005
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - SENDGRID_FROM_EMAIL=${SENDGRID_FROM_EMAIL}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_PHONE_NUMBER=${TWILIO_PHONE_NUMBER}
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    restart: unless-stopped
+    networks:
+      - cake-shop-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - cake-shop-network
+    restart: unless-stopped
+volumes:
+  rabbitmq_data:
+networks:
+  cake-shop-network:
+    driver: bridge
+
+
+
+
+
+#     pipeline {
+#   agent any
+
+#   stages {
+#     stage('Clone Repository') {
+#         steps {
+#             // Fetch the latest code from the GitHub repository
+#             git url: 'https://github.com/WijesekaraDNM/cake-shop-system-microservices.git', branch: 'main'
+#         }
+#     }
+#     stage('Build UserService') {
+#       steps {
+#         script {
+#             docker.build('masha230/user-service', './apps/user-service')
+#         }
+#       }
+#     }
+#     stage('Build FoodService') {
+#       steps {
+#         script {
+#             docker.build('masha230/food-service', './apps/food-service')
+#         }
+#       }
+#     }
+#     stage('Build ApiGateway') {
+#       steps {
+#         script {
+#             docker.build('masha230/api-gateway', './api_gateway')
+#         }
+#       }
+#     }
+#     stage('Docker Hub Login') {
+#         steps {
+#             withCredentials([string(credentialsId: 'password', variable: 'dockerPassword')]) {
+#                 script {
+#                     bat """
+#                     docker login -u masha230 -p %dockerPassword%
+#                     """
+#                 }
+#             }
+#         }
+#     }
+#     stage("push image"){
+#         steps{
+#             bat "docker push masha230/user-service"
+#             bat "docker push masha230/food-service"
+#             bat "docker push masha230/api-gateway"
+#         }
+#     }
+#     stage('Deploy') {
+#         steps {
+#             bat 'docker-compose up -d'
+#         }
+#     }
+#   }
+# }

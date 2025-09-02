@@ -1,0 +1,433 @@
+/* footer.module.css */
+
+/* Base Styles */
+.footer {
+  background: linear-gradient(135deg, #f8ccc9 0%, #f6b3ae 100%);
+  color: #333;
+  padding: 3rem 0 0;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #c7215d 0%, #f8a88b 100%);
+}
+
+.footerContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Main Footer Content */
+.footerMain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Brand Column */
+.brandColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.logoImage {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-right: 15px;
+  transition: transform 0.3s ease;
+}
+
+.brandLogo:hover .logoImage {
+  transform: rotate(-10deg) scale(1.1);
+}
+
+.brandName {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.brandPrefix {
+  background: #c7215d;
+  color: white;
+  padding: 0 8px;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-size: 1.5rem;
+}
+
+.brandDescription {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 15px;
+}
+
+.socialIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.socialIcon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.iconImage {
+  width: 60%;
+  height: 60%;
+  transition: all 0.3s ease;
+}
+
+.socialIcon:hover .iconImage {
+  transform: scale(1.2);
+}
+
+/* Contact Column */
+.contactColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 10px;
+  color: #c7215d;
+}
+
+.columnTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: #c7215d;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.contactItem:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: translateX(5px);
+}
+
+.contactIconWrapper {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contactIcon {
+  width: 60%;
+  height: 60%;
+  transition: all 0.3s ease;
+}
+
+.contactItem:hover .contactIcon {
+  transform: scale(1.2);
+}
+
+.contactText {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Features Column */
+.featuresColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.featureCard {
+  display: flex;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover {
+  background: white;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.featureIconWrapper {
+  width: 40px;
+  height: 40px;
+  background: #c7215d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.featureIcon {
+  width: 60%;
+  height: 60%;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover .featureIcon {
+  transform: rotate(15deg);
+}
+
+.featureContent {
+  flex: 1;
+}
+
+.featureTitle {
+  font-size: 0.9rem;
+  margin: 0 0 5px;
+  color: #c7215d;
+}
+
+.featureDescription {
+  font-size: 0.8rem;
+  margin: 0;
+  color: #666;
+}
+
+/* Links Column */
+.linksColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.linksGroup {
+  margin-bottom: 1.5rem;
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksList li {
+  margin-bottom: 10px;
+}
+
+.footerLink {
+  color: #555;
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  padding-bottom: 3px;
+  transition: all 0.3s ease;
+}
+
+.footerLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #c7215d;
+  transition: width 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #c7215d;
+}
+
+.footerLink:hover::after {
+  width: 100%;
+}
+
+.footerLink.active {
+  color: #c7215d;
+}
+
+/* Footer Bottom */
+.footerBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  margin-top: 2rem;
+}
+
+.paymentMethods {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.paymentIcon {
+  height: 30px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.paymentIcon:hover {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Active State for Interactive Elements */
+.active {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .footerMain {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerMain {
+    grid-template-columns: 1fr;
+  }
+  
+  .brandLogo {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .logoImage {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .brandName {
+    justify-content: center;
+  }
+  
+  .brandDescription {
+    text-align: center;
+  }
+  
+  .socialIcons {
+    justify-content: center;
+  }
+  
+  .columnTitle {
+    text-align: center;
+  }
+  
+  .columnTitle::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .contactItem {
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .contactIconWrapper {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+  
+  .featureCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .featureIconWrapper {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paymentMethods {
+    gap: 10px;
+  }
+  
+  .paymentIcon {
+    height: 25px;
+  }
+  
+  .copyright {
+    font-size: 0.7rem;
+  }
+}

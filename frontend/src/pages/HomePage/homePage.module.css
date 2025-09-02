@@ -1,0 +1,637 @@
+
+/* homePage.module.css */
+
+/* Base Styles */
+.homePage {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+  }
+  
+  /* Hero Section */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #f8e2e0 0%, #f9d5d1 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size:100%;
+    background: url('../../../public/foods/designpage.jpg');
+    opacity: 0.08;
+    z-index: 0;
+  }
+  
+  .heroContent {
+    flex: 1;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: #5c2a2a;
+  }
+  
+  .highlight {
+    color: #c7215d;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: rgba(255, 215, 215, 0.7);
+    z-index: -1;
+    transform: rotate(-1deg);
+  }
+  
+  .heroSubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #7a4a4a;
+  }
+  
+  .heroButtons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .primaryButton, .secondaryButton {
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .primaryButton {
+    background: #c7215d;
+    color: white;
+    box-shadow: 0 4px 15px rgba(199, 33, 93, 0.3);
+  }
+  
+  .primaryButton:hover {
+    background: #a51b4d;
+    transform: translateY(-2px);
+  }
+  
+  .secondaryButton {
+    background: transparent;
+    color: #c7215d;
+    border: 2px solid #c7215d;
+  }
+  
+  .secondaryButton:hover {
+    background: rgba(199, 33, 93, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .heroImage {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .heroImage img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* About Section */
+  .aboutSection {
+    display: flex;
+    padding: 5rem 2rem;
+    align-items: center;
+    background: white;
+    gap: 3rem;
+  }
+  
+  .aboutContent {
+    flex: 1;
+  }
+  
+  .aboutImage {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .aboutImage img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  
+  .aboutImage:hover img {
+    transform: scale(1.05);
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #5c2a2a;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background: #c7215d;
+    border-radius: 2px;
+  }
+  
+  .aboutText {
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+  }
+  
+  .aboutText p {
+    margin-bottom: 1rem;
+  }
+  
+  .readMoreButton {
+    background: none;
+    border: none;
+    color: #c7215d;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .readMoreButton:hover {
+    background: rgba(199, 33, 93, 0.1);
+  }
+  
+  .readMoreButton::after {
+    content: '→';
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .readMoreButton[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+  }
+  
+  /* Featured Cakes */
+  .featuredSection {
+    padding: 5rem 2rem;
+    background: #fff9f9;
+    text-align: center;
+  }
+  
+  .categoryFilter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  
+  .categoryButton {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    background: white;
+    border: 1px solid #e0c9c9;
+    color: #7a4a4a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .categoryButton:hover {
+    background: #f8e2e0;
+  }
+  
+  .categoryButton.active {
+    background: #c7215d;
+    color: white;
+    border-color: #c7215d;
+  }
+  
+  .cakeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .cakeCard {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .cakeCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cakeImageWrapper {
+    position: relative;
+    overflow: hidden;
+    height: 250px;
+  }
+  
+  .cakeImageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .cakeCard:hover .cakeImageWrapper img {
+    transform: scale(1.1);
+  }
+  
+  .cakeOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(92, 42, 42, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cakeCard:hover .cakeOverlay {
+    opacity: 1;
+  }
+  
+  .quickViewButton, .addToCartButton {
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .quickViewButton {
+    background: white;
+    color: #5c2a2a;
+  }
+  
+  .quickViewButton:hover {
+    background: #f0f0f0;
+  }
+  
+  .addToCartButton {
+    background: #c7215d;
+    color: white;
+  }
+  
+  .addToCartButton:hover {
+    background: #a51b4d;
+  }
+  
+  .cakeInfo {
+    padding: 1.5rem;
+    text-align: left;
+  }
+  
+  .cakeInfo h3 {
+    margin: 0 0 0.5rem;
+    color: #5c2a2a;
+  }
+  
+  .cakePrice {
+    font-weight: 700;
+    color: #c7215d;
+    font-size: 1.2rem;
+  }
+  
+  /* Special Offers */
+  .offersSection {
+    padding: 5rem 2rem;
+    background: #f8ccc9;
+    text-align: center;
+  }
+  
+  .offerCards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .offerCard {
+    flex: 1;
+    min-width: 300px;
+    max-width: 450px;
+    background: #fff9f9;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+  }
+  
+  .offerBadge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #c7215d;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    z-index: 1;
+  }
+  
+  .offerCard img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .offerContent {
+    padding: 1.5rem;
+    text-align: left;
+  }
+  
+  .offerContent h3 {
+    color: #5c2a2a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .offerContent p {
+    color: #7a4a4a;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .offerButton {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    background: #c7215d;
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .offerButton:hover {
+    background: #a51b4d;
+    transform: translateY(-2px);
+  }
+  
+  /* Testimonials */
+  .testimonialsSection {
+    padding: 5rem 2rem;
+    background: #fff9f9;
+    text-align: center;
+  }
+  
+  .testimonialsGrid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .testimonialCard {
+    flex: 1;
+    min-width: 300px;
+    max-width: 350px;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .testimonialCard:hover {
+    transform: translateY(-10px);
+  }
+  
+  .testimonialRating {
+    margin-bottom: 1rem;
+  }
+  
+  .starFilled {
+    color: #ffc107;
+  }
+  
+  .starEmpty {
+    color: #e0e0e0;
+  }
+  
+  .testimonialText {
+    font-style: italic;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .testimonialAuthor {
+    font-weight: 600;
+    color: #5c2a2a;
+  }
+  
+  /* Call to Action */
+  .ctaSection {
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, #5c2a2a 0%, #3a1a1a 100%);
+    color: white;
+    text-align: center;
+  }
+  
+  .ctaContent {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .ctaContent h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ctaContent p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+  
+  .ctaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .ctaPrimary, .ctaSecondary {
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .ctaPrimary {
+    background: white;
+    color: #5c2a2a;
+    border: none;
+  }
+  
+  .ctaPrimary:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+  }
+  
+  .ctaSecondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .ctaSecondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+  
+    .heroContent {
+      margin-bottom: 2rem;
+    }
+  
+    .heroTitle {
+      font-size: 2.8rem;
+    }
+  
+    .heroButtons {
+      justify-content: center;
+    }
+  
+    .aboutSection {
+      flex-direction: column;
+      padding: 3rem 1rem;
+    }
+  
+    .aboutImage {
+      order: -1;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 2.2rem;
+    }
+  
+    .heroSubtitle {
+      font-size: 1rem;
+    }
+  
+    .sectionTitle {
+      font-size: 2rem;
+    }
+  
+    .cakeGrid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heroTitle {
+      font-size: 1.8rem;
+    }
+  
+    .heroButtons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .primaryButton, .secondaryButton {
+      width: 100%;
+    }
+  
+    .categoryFilter {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .categoryButton {
+      width: 100%;
+      max-width: 200px;
+    }
+  
+    .ctaButtons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .ctaPrimary, .ctaSecondary {
+      width: 100%;
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  }

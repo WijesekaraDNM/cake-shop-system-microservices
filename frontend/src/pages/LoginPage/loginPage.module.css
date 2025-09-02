@@ -1,0 +1,131 @@
+.mainContainer {
+    background: linear-gradient(rgb(122, 3, 27),rgb(173, 5, 39),crimson,rgb(247, 105, 129),white,rgb(245, 134, 91),rgb(180, 49, 16),rgb(95, 47, 2));
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.Container {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 3rem;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.leftSide {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: linear-gradient(rgb(122, 3, 27),rgb(173, 5, 39),crimson,rgb(247, 105, 129),white,rgb(245, 134, 91),rgb(180, 49, 16),rgb(95, 47, 2));
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.rightSide {
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.details form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.errorMessage {
+    position: relative;
+    align-items: center;
+    color: crimson;
+    font-size: 0.85rem;
+    left: 6rem;
+    right: 0;
+    width: fit-content;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .Container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .leftSide, .rightSide {
+        width: 100%;
+    }
+    
+    .leftSide {
+        height: 200px;
+        border-radius: 3rem 3rem 0 0;
+    }
+    
+    .rightSide {
+        border-radius: 0 0 3rem 3rem;
+        padding: 30px 20px;
+    }
+    
+    .image {
+        width: 80%;
+        max-width: 300px;
+        height: auto;
+        position: static;
+        margin: 0 auto;
+    }
+    
+    .content {
+        position: static;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content {
+        font-size: 1rem;
+    }
+    
+    .rightSide {
+        padding: 20px 15px;
+    }
+}

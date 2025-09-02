@@ -1,0 +1,90 @@
+.container{
+    justify-content: center;
+    display: flex;
+    margin: 2rem;
+    padding: 0.5rem;
+}
+
+.container input {
+    border-radius: 10rem 0 0 10rem;
+    border: none;
+    height: 2rem;
+    width: 15rem;
+    background-color: wheat;
+    padding: 0.6rem; /* Specify a unit for padding */
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.container button {
+    color: wheat;
+    height: 2rem;
+    width: 5rem;
+    font-size: 1rem;
+    border-radius: 0 10rem 10rem 0; /* Remove spaces in border-radius */
+    border: none;
+    background-color: crimson;
+    opacity: 0.8;
+    outline: none;
+}
+
+.container button:hover {
+    opacity: 1;
+    color: white;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 992px) {
+    /* Laptop (lg) */
+    .container input {
+        height: 2rem;
+        width: 15rem;
+        font-size: 1rem;
+    }
+    
+    .container button {
+        height: 2rem;
+        width: 5rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    /* Tablet (md) */
+    .container input {
+        height: 1.5rem;
+        width: 10rem;
+        font-size: 0.9rem;
+    }
+    
+    .container button {
+        height: 1.5rem;
+        width: 4rem;
+        font-size: 0.9rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 767px) {
+    .container{
+        justify-content: center;
+        display: flex;
+    }
+    .container input {
+        height: 1.5rem;
+        width: 10rem;
+        font-size: 0.8rem;
+    }
+    
+    .container button {
+        height: 1.5rem;
+        width: 4rem;
+        font-size: 0.8rem;
+    }
+
+
+}

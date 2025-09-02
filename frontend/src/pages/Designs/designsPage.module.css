@@ -1,0 +1,313 @@
+/* designsPage.module.css */
+
+/* Base Styles */
+.container {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    overflow-x: hidden;
+  }
+  
+  /* Hero Banner */
+  .heroBanner {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+  .heroImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../public/foods/designpage.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    transform: none;
+  }
+  
+  .heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(92, 42, 42, 0.8) 0%, rgba(92, 42, 42, 0.5) 100%);
+    z-index: 2;
+  }
+  
+  .heroContent {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+    color: white;
+  }
+  
+  .heroTitle {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.8s ease 0.2s forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Search Section */
+  .searchSection {
+    padding: 2rem 0;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 10;
+    margin-top: -50px;
+  }
+  
+  .searchContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Tags Section */
+  .tagsSection {
+    padding: 0rem 0;
+    background: #fff9f9;
+  }
+  
+  .tagsContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .sectionTitle {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #5c2a2a;
+    position: relative;
+  }
+
+  .categoryTitle {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #5c2a2a;
+    position: relative;
+  }
+  
+  .sectionTitle::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #c7215d;
+    border-radius: 2px;
+  }
+  
+  /* Gallery Section */
+  .gallerySection {
+    padding: 2rem 0;
+  }
+  
+  .loadingSpinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #c7215d;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Call to Action */
+  .ctaSection {
+    padding: 5rem 1rem;
+    background: linear-gradient(135deg, #5c2a2a 0%, #3a1a1a 100%);
+    color: white;
+    text-align: center;
+  }
+  
+  .ctaContent {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .ctaContent h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ctaContent p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+  
+  .ctaButton {
+    padding: 0.8rem 2.5rem;
+    border-radius: 50px;
+    background: white;
+    color: #5c2a2a;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ctaButton:hover {
+    background: #f0f0f0;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .adminAction {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end; /* Align button to the right */
+  }
+  
+  .addDesignButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #c7215d, #5c2a2a);
+    color: #fff9f9;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 8px 15px rgba(199, 33, 93, 0.4);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    user-select: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .addDesignButton:hover,
+  .addDesignButton:focus {
+    background: linear-gradient(135deg, #5c2a2a, #c7215d);
+    box-shadow: 0 12px 25px rgba(92, 42, 42, 0.7);
+    outline: none;
+    transform: translateY(-2px);
+    border-color: #fff9f9;
+  }
+  
+  .addDesignButton:active {
+    background: #4a2121;
+    box-shadow: 0 5px 12px rgba(92, 42, 42, 0.85);
+    transform: translateY(1px);
+    border-color: #fff9f9;
+  }
+  
+  .addIcon {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.5;
+  }
+  
+  
+  /* Responsive Styles */
+  @media (max-width: 992px) {
+    .heroTitle {
+      font-size: 2.8rem;
+    }
+    
+    .heroSubtitle {
+      font-size: 1.2rem;
+    }
+    
+    .sectionTitle {
+      font-size: 2.2rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .heroBanner {
+      height: 60vh;
+    }
+    
+    .heroTitle {
+      font-size: 2.2rem;
+    }
+    
+    .sectionTitle {
+      font-size: 2rem;
+    }
+    
+    .searchSection {
+      margin-top: -30px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .heroBanner {
+      height: 50vh;
+      min-height: 400px;
+    }
+    
+    .heroTitle {
+      font-size: 1.8rem;
+    }
+    
+    .heroSubtitle {
+      font-size: 1rem;
+    }
+    
+    .sectionTitle {
+      font-size: 1.8rem;
+    }
+    
+    .ctaContent h2 {
+      font-size: 1.8rem;
+    }
+    
+    .ctaContent p {
+      font-size: 1rem;
+    }
+  }

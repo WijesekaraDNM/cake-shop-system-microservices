@@ -1,4 +1,3 @@
-version: "0.7"
 
 services:
   api_gateway:
@@ -11,7 +10,15 @@ services:
       - food_service
     env_file:
       - ./api_gateway/.env
-
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api_gateway
+    env_file:
+      - ./frontend/.env
   user_service:
     build:
       context: ./apps/user-service

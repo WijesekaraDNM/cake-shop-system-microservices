@@ -1,0 +1,299 @@
+/* Container and layout */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  font-family: 'Poppins', sans-serif;
+  color: #5c2a2a;
+}
+
+.adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.adminHeader h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.input {
+  padding: 10px 16px;
+  border-radius: 25px;
+  border: 2px solid #c7215d;
+  font-size: 1rem;
+  width: 250px;
+  transition: border-color 0.25s ease;
+}
+
+.input:focus {
+  border-color: #5c2a2a;
+  outline: none;
+}
+
+/* Tags filter */
+.tagsSection {
+  margin-bottom: 2rem;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.tagItem {
+  background: #fff9f9;
+  border: 2px solid #c7215d;
+  color: #5c2a2a;
+  padding: 6px 14px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+}
+
+.tagItem:hover {
+  background-color: #c7215d;
+  color: white;
+}
+
+.activeTag {
+  background-color: #c7215d;
+  color: white;
+  font-weight: 700;
+}
+
+/* Main admin content */
+.adminContent {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  min-height: 600px;
+}
+
+/* Sidebar list of foods */
+.foodList {
+  flex: 1 1 300px;
+  background: #fff9f9;
+  box-shadow: 0 3px 10px rgba(199, 33, 93, 0.15);
+  border-radius: 12px;
+  padding: 1rem;
+  max-height: 600px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+}
+
+.foodItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #5c2a2a;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.4rem;
+}
+
+.foodItem:hover,
+.activeFood {
+  background-color: #fce6eb;
+  font-weight: 700;
+  color: #c7215d;
+}
+
+.foodItem img {
+  max-width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 1rem;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.deleteButton {
+  border: none;
+  background: #d92f2f;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-size: 1.2rem;
+  line-height: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: #830e0e;
+}
+
+.addNewButton {
+  background: none;
+  border: 2px solid #c7215d;
+  color: #c7215d;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 10px 0;
+  width: 100%;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.addNewButton:hover {
+  background-color: #c7215d;
+  color: white;
+}
+
+/* Form section */
+.formSection {
+  flex: 2 1 600px;
+  background: #fff9f9;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(199, 33, 93, 0.15);
+}
+
+.formSection h2 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #c7215d;
+  padding-bottom: 0.3rem;
+  color: #5c2a2a;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input,
+.textarea {
+  padding: 14px 18px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 2px solid #dbb3bb;
+  font-family: 'Poppins', sans-serif;
+  color: #4a1d27;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #c7215d;
+  box-shadow: 0 0 12px 3px rgba(199, 33, 93, 0.5);
+  background-color: #fdf2f6;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #830e0e;
+  cursor: pointer;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.submitButton {
+  background: linear-gradient(135deg, #c7215d, #5c2a2a);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  min-width: 120px;
+}
+
+.submitButton:disabled {
+  background: #d8a3b0;
+  cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled),
+.submitButton:focus:not(:disabled) {
+  background: linear-gradient(135deg, #5c2a2a, #c7215d);
+  box-shadow: 0 8px 22px rgba(92, 42, 42, 0.9);
+  outline: none;
+}
+
+.cancelButton {
+  background: none;
+  color: #c7215d;
+  border: 2px solid #c7215d;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 120px;
+}
+
+.cancelButton:hover,
+.cancelButton:focus {
+  background-color: #c7215d;
+  color: white;
+  outline: none;
+}
+
+.error {
+  color: #d92f2f;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.noAccess {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #d92f2f;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .adminContent {
+    flex-direction: column;
+  }
+
+  .foodList {
+    max-height: 350px;
+  }
+}

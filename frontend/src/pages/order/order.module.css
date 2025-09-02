@@ -1,0 +1,118 @@
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    font-family: 'Arial', sans-serif;
+    color: #4a4a4a;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #b6a3a3;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .customerSection, .itemsSection, .summarySection {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1.5rem;
+  }
+
+
+  .customerSection h3, .itemsSection h3, .summarySection h3 {
+    position: relative;
+    padding-left: 20px; /* space for the vertical line */
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #5c2a2a;
+    margin-bottom: 1.2rem;
+  }
+
+  .customerSection h3::before,
+  .itemsSection h3::before,
+  .summarySection h3::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;   /* full height of the heading */
+    width: 4px;     /* thickness of the vertical line */
+    background-color: #c7215d; /* accent color matching your theme */
+    border-radius: 2px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .itemsList {
+    list-style: none;
+    padding-left: 0;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+  }
+  
+  .itemImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  .itemInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.3rem;
+    color: #5c2a2a;
+    font-weight: 600;
+  }
+  
+  .itemName {
+    font-size: 1.1rem;
+  }
+  
+  .summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: #5c2a2a;
+  }
+  
+  .totalPrice {
+    color: #c7215d;
+  }
+  
+  .checkoutButton {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #c7215d;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkoutButton:hover {
+    background-color: #9e1643;
+  }
+  
+  .noOrder {
+    text-align: center;
+    color: #b54040;
+    font-style: italic;
+    margin-top: 3rem;
+  }
+  

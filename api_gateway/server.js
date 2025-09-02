@@ -9,10 +9,11 @@ const USER_SERVICE_URL = process.env.USER_SERVICE_URL || 'http://localhost:5002'
 const CART_SERVICE_URL = process.env.CART_SERVICE_URL || 'http://localhost:5003';
 const ORDER_SERVICE_URL = process.env.ORDER_SERVICE_URL || 'http://localhost:5004';
 const NOTIFICATION_SERVICE_URL = process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:5005';
+const FRONTEND_SERVICE_URL = process.env.FOOD_SERVICE_URL || 'http://localhost:3000';
 
 // Enable CORS for your frontend domain or all origins during development
 app.use(cors({
-  origin: 'http://localhost:3000', // Change '*' to your frontend URL in production, e.g., 'http://localhost:3000'
+  origin: {FRONTEND_SERVICE_URL}, // Change '*' to your frontend URL in production, e.g., 'http://localhost:3000'
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
