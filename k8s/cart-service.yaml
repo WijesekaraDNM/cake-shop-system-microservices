@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-svc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cart-svc
+  template:
+    metadata:
+      labels:
+        app: cart-svc
+    spec:
+      containers:
+      - name: cart-svc
+        image: rashmithaDocker/cart-svc:latest
+        ports:
+        - containerPort: 5003
+        env:
+        - name: PORT
+          value: 5003
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: cart-svc-secrets
+              key: MONGODB_URI
+        - name: REDIS_HOST
+          value: "localhost"
+        - name: REDIS_PORT
+          value: 6379
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: cart-svc-secrets
+              key: JWT_SECRET
+        - name: NODE_ENV
+          value: "development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: cart-svc
+  ports:
+    - port: 5003

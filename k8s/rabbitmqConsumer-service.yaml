@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-consumer
+  labels:
+    app: rabbitmq-consumer
+spec:
+  replicas: 1 # can increase if you want more workers
+  selector:
+    matchLabels:
+      app: rabbitmq-consumer
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-consumer
+    spec:
+      containers:
+        - name: rabbitmq-consumer
+          image: rashmithadocker/rabbitmq-consumer:latest
+          env:
+            - name: RABBITMQ_URL
+              value: amqp://rabbitmq:5672
+            - name: NOTIFICATION_SERVICE_URL
+              value: http://notification-svc:5005/api/notifications
+            - name: ENABLE_HEALTH_CHECK
+              value: "true"
+            - name: HEALTH_CHECK_PORT
+              value: 5010
+            - name: NODE_ENV
+              value: development
+          ports:
+            - containerPort: 5010 # only needed if you enable healthcheck
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-consumer
+spec:
+  selector:
+    app: rabbitmq-consumer
+  ports:
+    - protocol: TCP
+      port: 5010
+      targetPort: 5010
+

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - name: api-gateway
+        image: rashmithaDocker/api-gateway:latest
+        ports:
+        - containerPort: 8081
+        env:
+        - name: FOOD_SERVICE_URL
+          value: http://food-svc:5001
+        - name: USER_SERVICE_URL
+          value: http://user-svc:5002
+        - name: CART_SERVICE_URL
+          value: http://cart-svc:5003
+        - name: ORDER_SERVICE_URL
+          value: http://order-svc:5004
+        - name: NOTIFICATION_SERVICE_URL
+          value: http://notification-svc:5005
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway
+spec:
+  type: ClusterIP
+  selector:
+    app: api-gateway
+  ports:
+    - port: 8081
