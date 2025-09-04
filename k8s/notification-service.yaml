@@ -53,8 +53,10 @@ kind: Service
 metadata:
   name: notification-svc
 spec:
-  type: ClusterIP
+  type: NordPort
   selector:
     app: notification-svc
   ports:
     - port: 5005
+    targetPort:5005
+    nodePort:30005

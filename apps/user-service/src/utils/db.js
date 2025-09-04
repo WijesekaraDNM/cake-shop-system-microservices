@@ -8,7 +8,7 @@ const PASSWORD_HASH_SALT_ROUNDS = 10;
 set('strictQuery', true);
 export const connectDB = async () => {
   try {
-    const conn = await connect(process.env.MONGO_URI,{
+    const conn = await connect(process.env.MONGO_URI_USER,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });

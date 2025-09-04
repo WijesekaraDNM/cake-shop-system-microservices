@@ -31,8 +31,10 @@ kind: Service
 metadata:
   name: order-svc
 spec:
-  type: ClusterIP
+  type: NordPort
   selector:
     app: order-svc
   ports:
     - port: 5004
+    targetPort:5004
+    nodePort:30004

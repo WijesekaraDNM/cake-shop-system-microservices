@@ -4,6 +4,8 @@ import { model,Schema } from 'mongoose';
 export const foodSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String },
+    size: { type: Number, required:true},
+    pieces: {type:Number, required:true},
     price: { type: Number, required: true },
     imageData: { type: Buffer, required: false },
     category: { type: String },

@@ -10,7 +10,7 @@ const auth = {
     }
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_CART);
       req.user = decoded;
       next();
     } catch (error) {
@@ -24,7 +24,7 @@ const auth = {
 
     if (token) {
       try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_CART);
         req.user = decoded;
       } catch (error) {
         // Invalid token, but continue without user

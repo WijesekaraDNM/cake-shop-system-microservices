@@ -5,7 +5,7 @@ import { foodModel } from '../models/foodModel.js';
 set('strictQuery', true);
 export const connectDB = async () => {
   try {
-    const conn = await connect(process.env.MONGO_URI,{
+    const conn = await connect(process.env.MONGO_URI_FOOD,{
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

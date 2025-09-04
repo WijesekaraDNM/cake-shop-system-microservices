@@ -18,11 +18,11 @@ spec:
         ports:
         - containerPort: 5001
         env:
-        - name: DATABASE_URL
+        - name: MONGO_URI_FOOD
           valueFrom:
             secretKeyRef:
               name: food-svc-secrets
-              key: DATABASE_URL
+              key: MONGO_URI_FOOD
         - name: PORT
           value: "5001"
 ---
@@ -31,8 +31,10 @@ kind: Service
 metadata:
   name: food-svc
 spec:
-  type: ClusterIP
+  type: NordPort
   selector:
     app: food-svc
   ports:
     - port: 5001
+    targetPort:5001
+    nodePort:30001

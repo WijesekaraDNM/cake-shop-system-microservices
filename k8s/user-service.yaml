@@ -22,22 +22,24 @@ spec:
           valueFrom:
             secretKeyRef:
               name: user-svc-secrets
-              key: MONGO_URI
+              key: MONGO_URI_USER
         - name: PORT
           value: "5002"
-        - name: JWT_SECRET
+        - name: JWT_SECRET_USER
           valueFrom:
             secretKeyRef:
               name: user-svc-secrets
-              key: JWT_SECRET
+              key: JWT_SECRET_USER
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: user-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: user-svc
   ports:
     - port: 5002
+    targetPort:5002
+    nodePort:30002

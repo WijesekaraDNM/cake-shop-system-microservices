@@ -31,6 +31,8 @@ export default function AdminDesignPage() {
   const [form, setForm] = useState({
     name: '',
     description: '',
+    size: '',
+    pieces: 0,
     price: 0,
     imageData: '',
     category: '',
@@ -71,6 +73,8 @@ export default function AdminDesignPage() {
       setForm({
         name: '',
         description: '',
+        size: '',
+        pieces: 0,
         price: 0,
         imageData: '',
         category: '',
@@ -86,7 +90,7 @@ export default function AdminDesignPage() {
       ...prev,
       [name]: type === 'checkbox'
         ? checked
-        : name === 'price'
+        : name === 'price' || name === 'size' || name === 'pieces'
           ? parseFloat(value)
           : value,
     }));
@@ -124,6 +128,8 @@ export default function AdminDesignPage() {
       setForm({
         name: '',
         description: '',
+        size: '',
+        pieces: 0,
         price: 0,
         imageData: '',
         category: '',
@@ -232,80 +238,113 @@ export default function AdminDesignPage() {
           <h2>{editingFood ? 'Edit Design' : 'Add New Design'}</h2>
           {error && <p className={classes.error}>{error}</p>}
           <form onSubmit={handleSubmit} className={classes.form}>
-            <label className={classes.label}>
-              Name
-              <input
-                name="name"
-                value={form.name}
-                onChange={handleInputChange}
-                required
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              Description
-              <textarea
-                name="description"
-                value={form.description}
-                onChange={handleInputChange}
-                className={classes.textarea}
-              />
-            </label>
-            <label className={classes.label}>
-              Price (LKR)
-              <input
-                name="price"
-                type="number"
-                min="0"
-                step="0.01"
-                value={form.price}
-                onChange={handleInputChange}
-                required
-                className={classes.input}
-              />
-            </label>
-            <label className={classes.label}>
-              Upload Image
-              <input
-                name='imageData'
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className={classes.input}
-              />
-            </label>
+            <div className={classes.formGrid}>
+              <label className={classes.label}>
+                Name
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
+                  required
+                  className={classes.input}
+                />
+              </label>
 
-            {form.imageData && (
-              <img
-                src={form.imageData}
-                alt="Preview"
-                style={{ maxWidth: '180px', marginTop: '0.5rem', borderRadius: '10px' }}
-              />
-            )}
+              <label className={classes.label}>
+                Price (LKR)
+                <input
+                  name="price"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.price}
+                  onChange={handleInputChange}
+                  required
+                  className={classes.input}
+                />
+              </label>
 
-            <label className={classes.label}>
-              Category
-              <input
-                list="categories"
-                name="category"
-                value={form.category}
-                onChange={handleInputChange}
-                required
-                className={classes.input}
-              />
-              <datalist id="categories">
-                {categoryOptions.map(opt => <option key={opt} value={opt} />)}
-              </datalist>
-            </label>
-            <label className={classes.checkboxLabel}>
-              <input
-                type="checkbox"
-                name="available"
-                checked={form.available}
-                onChange={handleInputChange}
-              />
-              Available
-            </label>
+              <label className={classes.label}>
+                Size (Kg)
+                <input
+                  name="size"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.size}
+                  onChange={handleInputChange}
+                  required
+                  className={classes.input}
+                />
+              </label>
+
+              <label className={classes.label}>
+                Pieces
+                <input
+                  name="pieces"
+                  type="number"
+                  min="0"
+                  step="1"
+                  value={form.pieces}
+                  onChange={handleInputChange}
+                  required
+                  className={classes.input}
+                />
+              </label>
+
+              <label className={classes.label} style={{ gridColumn: '1 / -1' }}>
+                Description
+                <textarea
+                  name="description"
+                  value={form.description}
+                  onChange={handleInputChange}
+                  className={classes.textarea}
+                />
+              </label>
+
+              <label className={classes.label}>
+                Upload Image
+                <input
+                  name="imageData"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className={classes.input}
+                />
+                {form.imageData && (
+                  <img
+                    src={form.imageData}
+                    alt="Preview"
+                    style={{ maxWidth: '180px', marginTop: '0.5rem', borderRadius: '10px' }}
+                  />
+                )}
+              </label>
+
+              <label className={classes.label}>
+                Category
+                <input
+                  list="categories"
+                  name="category"
+                  value={form.category}
+                  onChange={handleInputChange}
+                  required
+                  className={classes.input}
+                />
+                <datalist id="categories">
+                  {categoryOptions.map(opt => <option key={opt} value={opt} />)}
+                </datalist>
+              </label>
+
+              <label className={classes.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  name="available"
+                  checked={form.available}
+                  onChange={handleInputChange}
+                />
+                Available
+              </label>
+            </div>
 
             <div className={classes.buttonGroup}>
               <button
