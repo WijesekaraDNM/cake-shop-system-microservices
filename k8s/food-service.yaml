@@ -31,7 +31,7 @@ kind: Service
 metadata:
   name: food-svc
 spec:
-  type: NordPort
+  type: NodePort
   selector:
     app: food-svc
   ports:

@@ -42,7 +42,7 @@ kind: Service
 metadata:
   name: cart-svc
 spec:
-  type: NordPort
+  type: NodePort
   selector:
     app: cart-svc
   ports:
