@@ -39,5 +39,5 @@ spec:
     app: api-gateway
   ports:
     - port: 8081
-    targetPort:8081
-    nodePort:30006
+    targetPort: 8081
+    nodePort: 30006

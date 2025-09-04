@@ -58,5 +58,5 @@ spec:
     app: notification-svc
   ports:
     - port: 5005
-    targetPort:5005
-    nodePort:30005
+    targetPort: 5005
+    nodePort: 30005
