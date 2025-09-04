@@ -47,5 +47,5 @@ spec:
     app: cart-svc
   ports:
     - port: 5003
-    targetPort: 5003
-    nodePort: 30003
+      targetPort: 5003
+      nodePort: 30003

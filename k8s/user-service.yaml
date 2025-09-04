@@ -41,5 +41,5 @@ spec:
     app: user-svc
   ports:
     - port: 5002
-    targetPort: 5002
-    nodePort: 30002
+      targetPort: 5002
+      nodePort: 30002
