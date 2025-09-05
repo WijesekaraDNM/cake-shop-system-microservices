@@ -23,7 +23,7 @@ spec:
         - name: REACT_APP_CART_SERVICE_URL
           value: "http://cart-svc:5003"
         - name: API_GATEWAY_URL
-          value: "http://api_gateway:8081"
+          value: "http://api-gateway:8081"
 
 ---
 apiVersion: v1
