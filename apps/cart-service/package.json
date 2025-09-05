@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Microservice for cart management",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
@@ -17,7 +18,8 @@
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.0",
-    "redis": "^4.6.8"
+    "redis": "^4.6.8",
+    "express-prom-bundle": "^8.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

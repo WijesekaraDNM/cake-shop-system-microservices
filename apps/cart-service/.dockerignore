@@ -1,0 +1,10 @@
+# Add these lines to your .dockerignore file
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.git
+.env
+.dockerignore
+Dockerfile
+.gitignore

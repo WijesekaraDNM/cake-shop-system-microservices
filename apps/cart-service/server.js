@@ -1,3 +1,4 @@
+const promBundle = require('express-prom-bundle');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -7,6 +8,22 @@ const cartRoutes = require('./routes/cartRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5003;
+// 1. Create and apply metrics middleware
+// This automatically collects default metrics (request count, duration, etc.)
+const metricsMiddleware = promBundle({
+  includeMethod: true,     // Include HTTP method (GET, POST, etc.)
+  includePath: true,       // Include the request path (e.g., /api/users)
+  includeStatusCode: true, // Include HTTP status code (200, 404, etc.)
+  promClient: {
+    collectDefaultMetrics: {
+      timeout: 1000 // Collect default OS metrics every second
+    }
+  }
+});
+
+// Apply the metrics middleware to all routes before your other middleware
+app.use(metricsMiddleware);
+
 
 // Middleware
 app.use(cors());
