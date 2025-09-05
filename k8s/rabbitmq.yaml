@@ -7,12 +7,9 @@ spec:
   accessModes:
     - ReadWriteOnce
   resources:
-  requests:
-    cpu: 200m
-    memory: 256Mi
-  limits:
-    cpu: 500m
-    memory: 512Mi
+    requests:
+      storage: 1Gi   # ✅ only storage can be requested here
+  storageClassName: standard   # or whatever your cluster supports (check: kubectl get sc)
 
 ---
 apiVersion: v1
@@ -50,8 +47,8 @@ spec:
             - configMapRef:
                 name: rabbitmq-config
           volumeMounts:
-          - name: rabbitmq-data
-            mountPath: /var/lib/rabbitmq
+            - name: rabbitmq-data
+              mountPath: /var/lib/rabbitmq
           livenessProbe:
             exec:
               command: ["rabbitmq-diagnostics", "ping"]
@@ -65,9 +62,9 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 15
       volumes:
-      - name: rabbitmq-data
-        persistentVolumeClaim:
-          claimName: rabbitmq-pvc
+        - name: rabbitmq-data
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc
 
 ---
 apiVersion: v1
