@@ -9,7 +9,7 @@ spec:
   resources:
     requests:
       storage: 1Gi   # ✅ only storage can be requested here
-  storageClassName: standard   # or whatever your cluster supports (check: kubectl get sc)
+  storageClassName: hostpath   # or whatever your cluster supports (check: kubectl get sc)
 
 ---
 apiVersion: v1
