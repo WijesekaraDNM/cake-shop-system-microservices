@@ -28,6 +28,8 @@ spec:
           value: http://order-svc:5004
         - name: NOTIFICATION_SERVICE_URL
           value: http://notification-svc:5005
+        - name: FRONTEND_SERVICE_URL
+          value: http://frontend-svc:3000
 ---
 apiVersion: v1
 kind: Service
