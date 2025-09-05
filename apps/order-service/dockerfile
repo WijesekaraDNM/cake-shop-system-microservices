@@ -26,9 +26,12 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
 
 # Copy entrypoint
-COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh
+# COPY entrypoint.sh ./entrypoint.sh
+# RUN chmod +x ./entrypoint.sh
 
 EXPOSE 5004
 
-ENTRYPOINT ["./entrypoint.sh"]
+# ENTRYPOINT ["./entrypoint.sh"]
+
+# Start the service normally
+CMD ["node", "dist/index.js"]
