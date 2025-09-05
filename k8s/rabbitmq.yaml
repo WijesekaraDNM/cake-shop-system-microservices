@@ -8,7 +8,8 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 1Gi   # ✅ only storage can be requested here
+  storageClassName: hostpath   # or whatever your cluster supports (check: kubectl get sc)
 
 ---
 apiVersion: v1
@@ -46,15 +47,22 @@ spec:
             - configMapRef:
                 name: rabbitmq-config
           volumeMounts:
-            - name: rabbitmq-storage
+            - name: rabbitmq-data
               mountPath: /var/lib/rabbitmq
           livenessProbe:
             exec:
               command: ["rabbitmq-diagnostics", "ping"]
-            initialDelaySeconds: 10
+            initialDelaySeconds: 20
             periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command: ["rabbitmq-diagnostics", "ping"]
+            initialDelaySeconds: 10
+            periodSeconds: 15
       volumes:
-        - name: rabbitmq-storage
+        - name: rabbitmq-data
           persistentVolumeClaim:
             claimName: rabbitmq-pvc
 

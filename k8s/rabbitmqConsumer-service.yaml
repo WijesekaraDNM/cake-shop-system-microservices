@@ -5,7 +5,7 @@ metadata:
   labels:
     app: rabbitmq-consumer
 spec:
-  replicas: 1 # can increase if you want more workers
+  replicas: 1 # increase if you want multiple workers
   selector:
     matchLabels:
       app: rabbitmq-consumer
@@ -14,6 +14,17 @@ spec:
       labels:
         app: rabbitmq-consumer
     spec:
+      initContainers:
+        - name: wait-for-rabbitmq
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              until nc -z rabbitmq 5672; do
+                echo "waiting for rabbitmq"
+                sleep 5
+              done
       containers:
         - name: rabbitmq-consumer
           image: masha230/rabbitmqconsumer-service
@@ -29,7 +40,20 @@ spec:
             - name: NODE_ENV
               value: development
           ports:
-            - containerPort: 5010 # only needed if you enable healthcheck
+            - containerPort: 5010
+          livenessProbe:   # ✅ optional but recommended
+            httpGet:
+              path: /health
+              port: 5010
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:  # ✅ makes sure pod is "ready" before traffic
+            httpGet:
+              path: /health
+              port: 5010
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
 ---
 apiVersion: v1
 kind: Service
@@ -42,4 +66,4 @@ spec:
     - protocol: TCP
       port: 5010
       targetPort: 5010
-
+  type: ClusterIP
