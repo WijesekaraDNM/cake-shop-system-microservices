@@ -4,10 +4,29 @@ import { z } from 'zod';
 import bodyParser from 'body-parser';
 import db from './db.js';
 import { sendRabbitMessages, MessageData, OrderItem } from './message.js';
+// Import the prom-client package for metrics
+import promBundle from 'express-prom-bundle';
 
 dotenv.config();
 
 const app = express();
+
+// 1. Create and apply metrics middleware
+// This automatically collects default metrics (request count, duration, etc.)
+const metricsMiddleware = promBundle({
+  includeMethod: true,     // Include HTTP method (GET, POST, etc.)
+  includePath: true,       // Include the request path (e.g., /api/orders)
+  includeStatusCode: true, // Include HTTP status code (200, 404, etc.)
+  promClient: {
+    collectDefaultMetrics: {
+      // timeout: 1000 // Collect default OS metrics every second
+    }
+  }
+});
+
+// Apply the metrics middleware to all routes before your other middleware
+app.use(metricsMiddleware);
+
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -111,5 +130,11 @@ app.delete('/:id', async (req, res) => {
   }
 });
 
+// 2. The /metrics endpoint is automatically exposed by express-prom-bundle
+// No need to manually create it - Prometheus can scrape from /metrics
+
 const PORT = process.env.PORT || 5004;
-app.listen(PORT, () => console.log(`order-svc on :${PORT}`));
+app.listen(PORT, () => {
+  console.log(`order-svc on :${PORT}`);
+  console.log(`Metrics available at http://localhost:${PORT}/metrics`);
+});
