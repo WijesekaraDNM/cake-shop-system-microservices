@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
       - name: migrate
-        image: mash230/order-svc
+        image: mash230/order-service
         command: ["npx", "prisma", "migrate", "deploy"]
         env:
         - name: DATABASE_URL

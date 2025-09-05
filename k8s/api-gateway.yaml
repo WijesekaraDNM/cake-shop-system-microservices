@@ -40,4 +40,4 @@ spec:
   ports:
     - port: 8081
       targetPort: 8081
-      nodePort: 30006
+      nodePort: 30081
