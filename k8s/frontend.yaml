@@ -19,7 +19,7 @@ spec:
         - containerPort: 3000  # Common React app port, change if needed
         env:
         - name: NODE_ENV
-          value: "Development"
+          value: "production"
         - name: REACT_APP_CART_SERVICE_URL
           value: "http://cart-svc:5003"
         - name: API_GATEWAY_URL
