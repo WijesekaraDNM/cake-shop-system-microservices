@@ -7,8 +7,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   resources:
-    requests:
-      storage: 1Gi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
 
 ---
 apiVersion: v1
@@ -46,8 +50,8 @@ spec:
             - configMapRef:
                 name: rabbitmq-config
           volumeMounts:
-            - name: rabbitmq-storage
-              mountPath: /var/lib/rabbitmq
+          - name: rabbitmq-data
+            mountPath: /var/lib/rabbitmq
           livenessProbe:
             exec:
               command: ["rabbitmq-diagnostics", "ping"]
@@ -61,9 +65,9 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 15
       volumes:
-        - name: rabbitmq-storage
-          persistentVolumeClaim:
-            claimName: rabbitmq-pvc
+      - name: rabbitmq-data
+        persistentVolumeClaim:
+          claimName: rabbitmq-pvc
 
 ---
 apiVersion: v1
