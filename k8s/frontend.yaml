@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-svc
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend-svc
@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
       - name: frontend-svc
-        image: your-frontend-image:latest  # Replace with your actual frontend image
+        image: masha230/frontend
         ports:
         - containerPort: 3000  # Common React app port, change if needed
         env:
         - name: NODE_ENV
           value: "Development"
         - name: REACT_APP_CART_SERVICE_URL
-          value: "http://localhost:5003"
+          value: "http://cart-svc:5003"
         - name: API_GATEWAY_URL
           value: "http://api_gateway:8081"
 
@@ -37,4 +37,4 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30007
+      nodePort: 300011
