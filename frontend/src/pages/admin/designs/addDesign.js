@@ -31,8 +31,6 @@ export default function AdminDesignPage() {
   const [form, setForm] = useState({
     name: '',
     description: '',
-    size: '',
-    pieces: 0,
     price: 0,
     imageData: '',
     category: '',
@@ -73,8 +71,6 @@ export default function AdminDesignPage() {
       setForm({
         name: '',
         description: '',
-        size: '',
-        pieces: 0,
         price: 0,
         imageData: '',
         category: '',
@@ -128,8 +124,6 @@ export default function AdminDesignPage() {
       setForm({
         name: '',
         description: '',
-        size: '',
-        pieces: 0,
         price: 0,
         imageData: '',
         category: '',
@@ -258,34 +252,6 @@ export default function AdminDesignPage() {
                   min="0"
                   step="0.01"
                   value={form.price}
-                  onChange={handleInputChange}
-                  required
-                  className={classes.input}
-                />
-              </label>
-
-              <label className={classes.label}>
-                Size (Kg)
-                <input
-                  name="size"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={form.size}
-                  onChange={handleInputChange}
-                  required
-                  className={classes.input}
-                />
-              </label>
-
-              <label className={classes.label}>
-                Pieces
-                <input
-                  name="pieces"
-                  type="number"
-                  min="0"
-                  step="1"
-                  value={form.pieces}
                   onChange={handleInputChange}
                   required
                   className={classes.input}
