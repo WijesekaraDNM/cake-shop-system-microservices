@@ -11,6 +11,7 @@
   - [Local Development Using Docker](#local-development-using-docker)
   - [Kubernetes Deployment](#kubernetes-deployment)
   - [Jenkins CI/CD Pipeline](#jenkins-cicd-pipeline)
+  - [Jenkins Pipeline Configuration References](#Jenkins-Pipeline-Configuration-References)
 - [How to Use the System](#how-to-use-the-system)
 - [Configuration Management](#configuration-management)
 - [Challenges & Lessons Learned](#challenges--lessons-learned)
@@ -115,6 +116,50 @@ The Jenkins pipeline automates:
 - Set credentials (DockerHub password, Kubernetes config) in Jenkins  
 - Trigger pipeline manually or via webhook from code repository  
 
+...
+
+### Jenkins Pipeline Configuration References
+
+In the Jenkins pipeline, sensitive information such as API keys, passwords, and tokens are securely managed and **not included in the code repository or pipeline scripts**. However, the following configuration references are used publicly or as Kubernetes secrets injected during deployment:
+
+#### Public or Non-Sensitive Configuration References
+
+- **Docker Hub Repository Names:**  
+  `masha230/user-service`, `masha230/food-service`, `masha230/cart-service`, `masha230/order-service`,  
+  `masha230/notification-service`, `masha230/rabbitmqconsumer-service`, `masha230/api-gateway`, `masha230/frontend`
+
+- **Kubernetes Namespace:**  
+  `cakeshop`
+
+- **Kubernetes Manifest Paths:**  
+  `k8s/user-service.yaml`, `k8s/food-service.yaml`, `k8s/cart-service.yaml`, `k8s/order-service.yaml`,  
+  `k8s/notification-service.yaml`, `k8s/rabbitmq.yaml`, `k8s/rabbitMQConsumer-service.yaml`, `k8s/api-gateway.yaml`, `k8s/frontend.yaml`
+
+- **Docker Build Paths:**  
+  `./apps/user-service`, `./apps/food-service`, `./apps/cart-service`, `./apps/order-service`,  
+  `./apps/notification-service`, `./apps/rabbitMQConsumer-service`, `./api_gateway`, `./frontend`
+
+#### Kubernetes Secrets Created During Deployment
+
+The pipeline creates Kubernetes secrets (with sensitive values injected at runtime from Jenkins credentials) for each service, including but not limited to:
+
+- `user-svc-secrets` containing:  
+  - MongoDB connection URI for User Service  
+  - JWT secret for user authentication  
+
+- `food-svc-secrets` containing:  
+  - MongoDB URI for Product Service  
+
+- `cart-svc-secrets` containing:  
+  - MongoDB URI for Cart Service  
+  - JWT secret for cart service  
+
+- `order-svc-secrets` containing:  
+  - PostgreSQL connection URL for Order Service  
+
+- `notification-svc-secrets` containing:  
+  - SendGrid API key and sender email  
+  - Twilio account SID, auth token, and phone number  
 
 ---
 
