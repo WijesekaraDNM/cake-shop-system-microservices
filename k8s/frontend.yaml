@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: frontend-svc
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: frontend-svc
@@ -13,17 +13,40 @@ spec:
         app: frontend-svc
     spec:
       containers:
-      - name: frontend-svc
-        image: masha230/frontend
-        ports:
-        - containerPort: 3000  # Common React app port, change if needed
-        env:
-        - name: NODE_ENV
-          value: "production"
-        - name: REACT_APP_CART_SERVICE_URL
-          value: "http://cart-svc:5003"
-        - name: API_GATEWAY_URL
-          value: "http://api-gateway:8081"
+        - name: frontend-svc
+          image: masha230/frontend:v2
+          ports:
+            - containerPort: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          volumeMounts:
+            - name: runtime-config
+              mountPath: /usr/share/nginx/html/env.js
+              subPath: env.js
+      volumes:
+        - name: runtime-config
+          configMap:
+            name: frontend-env
+            items:
+              - key: env.js
+                path: env.js
 
 ---
 apiVersion: v1
@@ -35,6 +58,6 @@ spec:
   selector:
     app: frontend-svc
   ports:
-    - port: 3000
-      targetPort: 3000
+    - port: 80
+      targetPort: 80
       nodePort: 30011
