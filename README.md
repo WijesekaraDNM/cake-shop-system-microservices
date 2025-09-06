@@ -14,8 +14,6 @@
 - [How to Use the System](#how-to-use-the-system)
 - [Configuration Management](#configuration-management)
 - [Challenges & Lessons Learned](#challenges--lessons-learned)
-- [Contributors](#contributors)
-- [License](#license)
 
 ---
 
