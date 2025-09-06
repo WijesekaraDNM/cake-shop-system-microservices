@@ -6,6 +6,7 @@
 - [Project Overview](#project-overview)
 - [Architecture Introduction](#architecture-introduction)
 - [Technology Stack](#technology-stack)
+- [Project file Structure](#Project-file-Structure)
 - [Setup Instructions](#setup-instructions)
   - [Prerequisites](#prerequisites)
   - [Local Development Using Docker](#local-development-using-docker)
@@ -25,13 +26,16 @@ A cloud-native, scalable Cake Shop Ordering System with microservices architectu
 
 ## Architecture Introduction
 
-- 👤 **User Service:** User signup and login  
-- 🎂 **Product Service:** Cake catalog and inventory management  
-- 🛒 **Cart Service:** Cart and product selection features  
-- 📦 **Order Service:** Handles order placement with transactions  
-- 🔔 **Notification Service:** Sends email and SMS via RabbitMQ  
-- 🔄 **RabbitMQConsumer Service:** Processes message queue events  
-- 🚪 **API Gateway:** Routes requests and handles JWT authentication  
+This application follows a microservices architecture, consisting of:
+
+- **API Gateway** (Port 8081) - Routes client requests to backend services, handles CORS and JWT authentication
+- **User Service** (Port 5002) - User registration, login, and profile management
+- **Product Service** (Port 5001) - Manage cake catalog and inventory
+- **Cart Service** (Port 5003) - Manage shopping carts and selections
+- **Order Service** (Port 5004) - Processes orders with transactional consistency
+- **Notification Service** (Port 5005) - Sends confirmation emails and SMS asynchronously via RabbitMQ
+- **RabbitMQ Consumer Service** - Processes asynchronous messages from RabbitMQ queues
+- **Frontend** (Port 3000) - React-based SPA served with Nginx 
 
 ---
 
@@ -51,14 +55,32 @@ A cloud-native, scalable Cake Shop Ordering System with microservices architectu
 
 ---
 
+## Project file Structure
+
+   cake-shop/
+├── apps/
+│ ├── user-service/
+│ ├── food-service/
+│ ├── cart-service/
+│ ├── order-service/
+│ ├── notification-service/
+│ ├── rabbitmqconsumer-service/
+├── api_gateway/
+├── frontend/
+├── k8s/
+├── Jenkinsfile
+└── docker-compose.yml
+---
+
 ## Setup Instructions
 
 ### Prerequisites
 
-- Install [Docker](https://www.docker.com/get-started) and Docker Compose 🐳  
+- Install [Docker](https://www.docker.com/get-started) and Docker Compose 🐳
+- Node.js 18+ (optional, for local development) 
 - Kubernetes cluster (local Minikube, Docker Desktop or cloud-based) ☸️  
 - RabbitMQ server or Kubernetes RabbitMQ deployment 🐰  
-- Jenkins server configured with Docker and Kubernetes access ⚙️  
+- Jenkins server configured with Docker and Kubernetes access (K8s) ⚙️  
 - API keys for SendGrid and Twilio (notification service) 📧📱  
 
 ---
@@ -71,8 +93,10 @@ A cloud-native, scalable Cake Shop Ordering System with microservices architectu
    docker-compose build
 3. Start all services together:
    docker-compose up
-5. Access API Gateway at:
-   http://localhost:8081
+5. Access the app 
+- Frontend UI: http://localhost:3000  
+- API Gateway: http://localhost:8081  
+- RabbitMQ Management UI (optional): http://localhost:15672 
 ---
 ### Kubernetes Deployment
 1. Build Docker images and push to a container registry for all services and frontend:
@@ -86,7 +110,9 @@ Repeat for other services (`food-service`, `cart-service`, etc.)
 3. Verify service pods and scripts:  
    kubectl get pods -n cakeshop
    kubectl get svc -n cakeshop
-4. Access API Gateway exposed as NodePort (default: port 30081) or configured Ingress.
+4. Access services based on NodePort or Ingress config
+- API Gateway NodePort default: 30081  
+- Frontend NodePort default: 30080  
 
 ---
 
@@ -106,22 +132,6 @@ The Jenkins pipeline automates:
 - Set credentials (DockerHub password, Kubernetes config) in Jenkins  
 - Trigger pipeline manually or via webhook from code repository  
 
----
-
-## API Gateway Code Summary
-
-- Proxy middleware routes requests to respective microservices (food, user, cart, order)  
-- CORS is enabled with allowed origin set to frontend URL  
-- Health check endpoint available at `/health`  
-- Runs on port 8081 by default  
-
----
-
-## Frontend Dockerfile Summary
-
-- Multi-stage Dockerfile builds React app using Node  
-- Serves static files using Nginx stable alpine image  
-- Exposes port 80 for frontend access  
 
 ---
 
@@ -154,5 +164,4 @@ The Jenkins pipeline automates:
 - Decoupling services with event-driven communication  
 - Embracing cloud-native application design principles  
 
----
-   
+
