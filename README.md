@@ -6,7 +6,6 @@
 - [Project Overview](#project-overview)
 - [Architecture Introduction](#architecture-introduction)
 - [Technology Stack](#technology-stack)
-- [Project file Structure](#Project-file-Structure)
 - [Setup Instructions](#setup-instructions)
   - [Prerequisites](#prerequisites)
   - [Local Development Using Docker](#local-development-using-docker)
@@ -53,23 +52,7 @@ This application follows a microservices architecture, consisting of:
 | Config Management  | Kubernetes ConfigMaps and Secrets             |
 | CI/CD              | Jenkins                                      |
 
----
 
-## Project file Structure
-
-   cake-shop/
-├── apps/
-│ ├── user-service/
-│ ├── food-service/
-│ ├── cart-service/
-│ ├── order-service/
-│ ├── notification-service/
-│ ├── rabbitmqconsumer-service/
-├── api_gateway/
-├── frontend/
-├── k8s/
-├── Jenkinsfile
-└── docker-compose.yml
 ---
 
 ## Setup Instructions
