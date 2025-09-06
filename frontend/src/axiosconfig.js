@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'http://localhost:8081';
+const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'http://localhost:30081';
 
 export const userApi = axios.create({
   baseURL:`${API_GATEWAY_URL}/api/user`  // user service proxy root
