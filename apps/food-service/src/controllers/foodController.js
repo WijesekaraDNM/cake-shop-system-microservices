@@ -47,8 +47,6 @@ const createFood = handler(async (req, res) => {
     const food = new foodModel({
       name,
       description,
-      size,
-      pieces,
       price,
       imageData: imageDataStr,
       category,
