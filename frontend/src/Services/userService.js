@@ -46,9 +46,34 @@ export const login = async (email, password) => {
 
 
 export const register = async registerData => {
-    const { data } = await userApi.post('/register', registerData);
-    localStorage.setItem('user', JSON.stringify(data));
-    return data;
+    try {
+      const { data } = await userApi.post('/register', registerData);
+      localStorage.setItem('user', JSON.stringify(data));
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error("Registration error:", error.response.data);
+  
+        const errData = error.response.data;
+  
+        // Show specific toast error messages by error code
+        if (errData.code === 'EMAIL_ALREADY_EXISTS') {
+          toast.error("Email is already registered.");
+        } else if (errData.code === 'INVALID_DATA') {
+          toast.error("Invalid registration data provided.");
+        } else if (errData.message) {
+          toast.error(errData.message);
+        } else {
+          toast.error("Registration failed. Please try again.");
+        }
+  
+        throw errData;
+      } else {
+        console.error("Registration error - no response:", error);
+        toast.error("Network or server error during registration.");
+        throw new Error("Network or server error during registration.");
+      }
+    }
 };
 
 export const logout =() => {

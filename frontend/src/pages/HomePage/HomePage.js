@@ -33,7 +33,7 @@ const HomePage = () => {
           </p>
           <div className={classes.heroButtons}>
             <button className={classes.primaryButton}>Order Now</button>
-            <button className={classes.secondaryButton}>View Designs</button>
+            <button onClick={()=>navigate('/DesignsPage')} className={classes.secondaryButton}>View Designs</button>
           </div>
         </div>
         <div className={classes.heroImage}>

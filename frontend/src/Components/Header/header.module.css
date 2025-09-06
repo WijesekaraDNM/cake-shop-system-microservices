@@ -1,7 +1,7 @@
 /* header.module.css */
 
 .header {
-    background: linear-gradient(rgb(248, 204, 183), rgb(250, 168, 147) 65%, rgb(143, 6, 33) 100%);
+    background: linear-gradient(#f8ccb7, #faa893 65%, #8e0621 100%);
     padding: 0;
     border-bottom: 1px solid brown;
     position: sticky;
@@ -126,7 +126,7 @@
   }
   
   .menu {
-    position: relative;
+    position: absolute;
     right: 0;
     top: 100%;
     background: white;
@@ -148,7 +148,7 @@
   }
   
   .menu a:hover {
-    background: rgb(231, 28, 89);
+    background: #e71c59;
     color: white;
   }
   
