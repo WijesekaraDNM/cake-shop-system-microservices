@@ -5,6 +5,6 @@ metadata:
 data:
   env.js: |
     window._env_ = {
-      API_GATEWAY_URL: "http://api-gateway:8081",
+      API_GATEWAY_URL: "http://localhost:30081",
       CART_SERVICE_URL: "http://cart-svc:5003"
     };

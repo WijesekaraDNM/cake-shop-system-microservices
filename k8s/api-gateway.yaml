@@ -29,7 +29,7 @@ spec:
         - name: NOTIFICATION_SERVICE_URL
           value: http://notification-svc:5005
         - name: FRONTEND_SERVICE_URL
-          value: http://frontend:80
+          value: http://frontend-svc:80
 ---
 apiVersion: v1
 kind: Service
